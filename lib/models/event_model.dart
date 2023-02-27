@@ -1,0 +1,3 @@
+class EventModel {
+  String? eventname;
+}

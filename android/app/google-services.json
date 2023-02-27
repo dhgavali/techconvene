@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "199022085697",
+    "project_id": "tech-convene",
+    "storage_bucket": "tech-convene.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199022085697:android:739640d844b80be6e068c0",
+        "android_client_info": {
+          "package_name": "com.dhenterrprises.techconvene"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199022085697-rr5rrob4m2o78msihe9ogipinobi1ouj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dhenterrprises.techconvene",
+            "certificate_hash": "e257abc4aec49f548c91527b45dcadb035b7268e"
+          }
+        },
+        {
+          "client_id": "199022085697-n4niieveruo8ls76gu8i1r6v0tv1hejt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmspQnni8785T0g_FPJ6mDiTwWoW5DbXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199022085697-n4niieveruo8ls76gu8i1r6v0tv1hejt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
