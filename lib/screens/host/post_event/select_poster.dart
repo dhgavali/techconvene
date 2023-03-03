@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:techconvene/constants/buttons.dart';
 import 'package:techconvene/constants/colors.dart';
+import 'package:techconvene/models/event_model.dart';
 import 'package:techconvene/services/admin/admin_db.dart';
 import 'package:techconvene/services/admin/file_controller.dart';
 import 'package:techconvene/services/admin/upload_controller.dart';
@@ -95,8 +97,10 @@ class _SelectPosterState extends State<SelectPoster> {
                                     await uploadController.uploadImage(img);
                                 Map<String, dynamic> eventdata = Get.arguments;
                                 eventdata['posterUrl'] = path;
-
-                                print(eventdata);
+                                eventdata['uid'] =
+                                    FirebaseAuth.instance.currentUser!.uid;
+                               
+                               
                                 bool res = await AdminDb.postEvent(eventdata);
                                 if (res) {
                                   print("successfully uploaded event");

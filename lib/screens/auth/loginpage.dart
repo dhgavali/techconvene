@@ -29,74 +29,77 @@ class LoginScreen extends StatelessWidget {
           FocusManager.instance.primaryFocus!.unfocus();
         },
         child: SafeArea(
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: GetBuilder<AuthController>(
-              builder: (controller) => controller.isLoading.value
-                  ? Loadings.basic()
-                  : Form(
-                      key: _formkey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MyTexts.h1("Welcome Back !!"),
-                          MyTexts.h2("Login"),
-                          SizedBox(
-                            height: 40.h,
-                          ),
-                          MyTextField(
-                            label: "Email id",
-                            controller: TextEditingController(),
-                          ),
-                          MyTextField(
-                            label: "Password",
-                            ispassword: true,
-                            controller: TextEditingController(),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 25.w, vertical: 8.h),
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {
-                                // TODO: Forgot password Function call
-                              },
-                              child: MyTexts.h4(
-                                "Forgot Password ?",
+          child: SingleChildScrollView(
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: GetBuilder<AuthController>(
+                builder: (controller) => controller.isLoading.value
+                    ? Loadings.basic()
+                    : Form(
+                        key: _formkey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MyTexts.h1("Welcome Back !!"), 
+                            MyTexts.h2("Login"),
+                            SizedBox(
+                              height: 40.h,
+                            ),
+                            MyTextField(
+                              label: "Email id",
+                              controller: TextEditingController(),
+                            ),
+                            MyTextField(
+                              label: "Password",
+                              ispassword: true,
+                              controller: TextEditingController(),
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 25.w, vertical: 8.h),
+                              alignment: Alignment.centerRight,
+                              child: TextButton(
+                                onPressed: () {
+                                  // TODO: Forgot password Function call
+                                },
+                                child: MyTexts.h4(
+                                  "Forgot Password ?",
+                                ),
                               ),
                             ),
-                          ),
-                          PrimaryBtn(
-                            label: "Login",
-                            onpress: () async {
-                              if (_formkey.currentState!.validate()) {
-                                controller.email = _username.text.toString();
-                                controller.password = _password.text.toString();
+                            PrimaryBtn(
+                              label: "Login",
+                              onpress: () async {
+                                if (_formkey.currentState!.validate()) {
+                                  controller.email = _username.text.toString();
+                                  controller.password =
+                                      _password.text.toString();
 
-                                await controller.login(context);
-                              }
-                            },
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          const AuthIcons(),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          AuthLabelWidget(
-                            label1: "Don't Have an account ?",
-                            label2: "Sign Up",
-                            onpress: () {
-                              Get.offAllNamed(
-                                RoutesNames.signupScreen,
-                              );
-                            },
-                          ),
-                        ],
+                                  await controller.login(context);
+                                }
+                              },
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            const AuthIcons(),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            AuthLabelWidget(
+                              label1: "Don't Have an account ?",
+                              label2: "Sign Up",
+                              onpress: () {
+                                Get.offAllNamed(
+                                  RoutesNames.signupScreen,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+              ),
             ),
           ),
         ),

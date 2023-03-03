@@ -94,7 +94,7 @@ class AuthController extends GetxController {
   Future<void> hostSignUp(
       BuildContext context, Map<String, dynamic> hostdata) async {
     try {
-      isLoading.value = true;
+      isLoading.value = true; 
       update();
       UserCredential? user = await AuthMethods().signUp(
         context: context,

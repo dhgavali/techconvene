@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:techconvene/constants/loading.dart';
 import 'package:techconvene/constants/text_styles.dart';
+import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/services/admin/admin_db.dart';
+import 'package:techconvene/services/auth.dart';
 
 class HostProfile extends StatelessWidget {
   const HostProfile({super.key});
@@ -28,6 +31,17 @@ class HostProfile extends StatelessWidget {
                     MyTexts.h2("Mobile: ${data['mobile']}"),
                     MyTexts.h2("Club: ${data['club']}"),
                     MyTexts.h2("City: ${data['city']}"),
+                    Center(
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            await AuthMethods().signOut();
+                            // setState(() {
+                            //   isloading = !isloading;
+                            // });
+                            Get.offAllNamed(RoutesNames.loginScreen);
+                          },
+                          child: Text("Logout")),
+                    ),
                   ],
                 );
               }

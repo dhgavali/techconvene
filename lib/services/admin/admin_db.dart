@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:techconvene/models/event_model.dart';
 
 class AdminDb {
   static final CollectionReference _ref =
       FirebaseFirestore.instance.collection("admin");
+  static final CollectionReference _eventref =
+      FirebaseFirestore.instance.collection("event");
 
   // add user data on sign up
   static Future<bool> addUser(Map<String, dynamic> data) async {
@@ -53,7 +55,7 @@ class AdminDb {
 
   static Future<bool> postEvent(Map<String, dynamic> eventdata) async {
     try {
-      await _ref.add(eventdata);
+      await _eventref.add(eventdata);
       return true;
     } catch (e) {
       print(e.toString());
@@ -61,3 +63,13 @@ class AdminDb {
     }
   }
 }
+
+
+
+  // Future<List<Employee>> retrieveEmployees() async {
+  //   QuerySnapshot<Map<String, dynamic>> snapshot =
+  //       await _db.collection("Employees").get();
+  //   return snapshot.docs
+  //       .map((docSnapshot) => Employee.fromDocumentSnapshot(docSnapshot))
+  //       .toList();
+  // }
