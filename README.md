@@ -1,5 +1,6 @@
 # techconvene - College Event Marking Application
-
+<p> <b> Description </b> : The project aims to provide a platform students and event organizors specifically for college events, tech fest, local hackathons. There is lack of platform for small events and college events marketing and hosting. So here we tried to solve this problem with the help of software. Using our application event organizers will be able to reach out with maximum students, thus increase in their participation. And Students will get opportunity to explore endless events which gives them higheer chances to win and connect with communnity. 
+  
 Built using Flutter & Dart. 
 
 Some screenshots of the applications: 
