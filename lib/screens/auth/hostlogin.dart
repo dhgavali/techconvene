@@ -68,11 +68,12 @@ class HostLogin extends StatelessWidget {
                             label: "Login",
                             onpress: () async {
                               if (_formkey.currentState!.validate()) {
-                                controller.email = _username.text.toString();
-                                controller.password = _password.text.toString();
+                                controller.email =
+                                    _username.text.toString().trim();
+                                controller.password =
+                                    _password.text.toString().trim();
 
-                                await controller.hostLogin(
-                                    context);
+                                await controller.hostLogin(context);
                               }
                             },
                           ),

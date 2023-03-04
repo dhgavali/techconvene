@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/shared/SharedData.dart';
 import 'package:techconvene/shared/mysnackbar.dart';
 
@@ -12,10 +14,8 @@ class AuthMethods {
     if (googleUser != null) {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
-
       final OAuthCredential credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-
       try {
         UserCredential firebaseUser =
             await FirebaseAuth.instance.signInWithCredential(credential);
@@ -55,7 +55,7 @@ class AuthMethods {
       }
     }
   }
-  
+
 // sign up with email and password
   Future<UserCredential?> signUp({
     required BuildContext context,
@@ -94,6 +94,7 @@ class AuthMethods {
     try {
       await FirebaseAuth.instance.signOut();
       await SharedData.saveRole("");
+      Get.offAllNamed(RoutesNames.onboard,);
     } catch (e) {
       // print(e.toString());
     }

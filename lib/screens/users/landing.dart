@@ -87,7 +87,7 @@ class LandingPage extends StatelessWidget {
               HomePage(),
               const ExplorePage(),
               const SavedEventsPage(),
-              const ProfilePage(),
+              ProfilePage(),
             ],
           )),
     ));

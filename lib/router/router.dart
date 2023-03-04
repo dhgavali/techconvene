@@ -12,6 +12,7 @@ import 'package:techconvene/screens/host/adminLanding.dart';
 import 'package:techconvene/screens/host/adminhome.dart';
 import 'package:techconvene/screens/host/post_event/event_form.dart';
 import 'package:techconvene/screens/host/post_event/select_poster.dart';
+import 'package:techconvene/screens/host/post_event/step_one.dart';
 import 'package:techconvene/screens/users/landing.dart';
 import 'package:techconvene/screens/users/homepage.dart';
 
@@ -65,6 +66,7 @@ class AppRoutes {
     GetPage(
       name: RoutesNames.eventforms,
       page: () => EventForm(),
+      // page: () => EventForm(),
     ),
     GetPage(
       name: RoutesNames.selectposter,

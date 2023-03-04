@@ -52,7 +52,7 @@ class _MyTextFieldState extends State<MyTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 5),
       width: widget.width.w,
       height: widget.height.h,
       decoration: BoxDecoration(
@@ -60,7 +60,7 @@ class _MyTextFieldState extends State<MyTextField> {
         borderRadius: BorderRadius.circular(15.r),
         boxShadow: [
           BoxShadow(
-            offset: Offset(2, 2),
+            offset: const Offset(2, 2),
             color: AppColors.shadowColor,
             blurRadius: 4.r,
           ),
@@ -83,7 +83,7 @@ class _MyTextFieldState extends State<MyTextField> {
           widget.controller.text = value;
         },
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(horizontal: 12),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
           border: InputBorder.none,
           hintText: widget.label,
           hintStyle: MyTextStyles.customStyle(

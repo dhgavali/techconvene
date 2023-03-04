@@ -5,6 +5,7 @@ import 'package:techconvene/controller/adminLand_controller.dart';
 import 'package:techconvene/screens/host/adminhome.dart';
 import 'package:techconvene/screens/host/hostProfile.dart';
 import 'package:techconvene/screens/host/post_event/event_form.dart';
+import 'package:techconvene/screens/host/post_event/step_one.dart';
 import 'package:techconvene/screens/users/explorepage.dart';
 
 class AdminLanding extends StatelessWidget {
@@ -76,9 +77,9 @@ class AdminLanding extends StatelessWidget {
       body: Obx(() => IndexedStack(
             index: landingPageController.tabIndex.value,
             children: [
-            const  AdminHome(),
+              const AdminHome(),
               EventForm(),
-             const HostProfile(),
+              const HostProfile(),
             ],
           )),
     ));
