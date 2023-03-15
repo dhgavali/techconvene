@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                             EventModel data = events[index];
                             return GestureDetector(
                               onTap: () {
-                                // print(snapshot.data[index].);
+                                
                               },
                               child: Container(
                                 margin: const EdgeInsets.all(10),
