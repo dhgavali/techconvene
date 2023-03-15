@@ -6,6 +6,7 @@ import 'package:techconvene/screens/users/explorepage.dart';
 import 'package:techconvene/screens/users/homepage.dart';
 import 'package:techconvene/screens/users/profile.dart';
 import 'package:techconvene/screens/users/saved_events.dart';
+import 'package:techconvene/screens/users/settingspage.dart';
 
 class LandingPage extends StatelessWidget {
   final TextStyle unselectedLabelStyle = TextStyle(
@@ -87,7 +88,7 @@ class LandingPage extends StatelessWidget {
               HomePage(),
               const ExplorePage(),
               const SavedEventsPage(),
-              ProfilePage(),
+              const SettingsPage(),
             ],
           )),
     ));

@@ -1,13 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:techconvene/constants/colors.dart';
 import 'package:techconvene/constants/loading.dart';
 import 'package:techconvene/constants/text_styles.dart';
 import 'package:techconvene/models/event_model.dart';
-import 'package:techconvene/router/route_names.dart';
-import 'package:techconvene/services/auth.dart';
 import 'package:techconvene/services/events/event_services.dart';
 
 class HomePage extends StatefulWidget {
