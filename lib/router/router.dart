@@ -13,6 +13,7 @@ import 'package:techconvene/screens/host/adminhome.dart';
 import 'package:techconvene/screens/host/post_event/event_form.dart';
 import 'package:techconvene/screens/host/post_event/select_poster.dart';
 import 'package:techconvene/screens/host/post_event/step_one.dart';
+import 'package:techconvene/screens/users/event_screen.dart';
 import 'package:techconvene/screens/users/landing.dart';
 import 'package:techconvene/screens/users/homepage.dart';
 
@@ -42,7 +43,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RoutesNames.homeScreen,
-      page: () => HomePage(),
+      page: () => const HomePage(),
     ),
     GetPage(
       name: RoutesNames.loginScreen,
@@ -72,6 +73,10 @@ class AppRoutes {
       name: RoutesNames.selectposter,
       arguments: AppRoutes,
       page: () => const SelectPoster(),
+    ),
+    GetPage(
+      name: RoutesNames.eventScreen,
+      page: () => const EventScreen(),
     ),
   ];
 }

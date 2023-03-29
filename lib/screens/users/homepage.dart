@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:techconvene/constants/colors.dart';
 import 'package:techconvene/constants/loading.dart';
 import 'package:techconvene/constants/text_styles.dart';
 import 'package:techconvene/models/event_model.dart';
+import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/services/events/event_services.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,15 +37,8 @@ class _HomePageState extends State<HomePage> {
               minRadius: 25.h,
               maxRadius: 25.h,
               backgroundColor: Colors.red,
-              // foregroundImage: FirebaseAuth.instance.currentUser!.photoURL !=
-              //         null
-              //     ? NetworkImage(
-              //         FirebaseAuth.instance.currentUser!.photoURL.toString())
-              //     : null,
-              backgroundImage: AssetImage("assets/icons/profile.png"),
+              backgroundImage: const AssetImage("assets/icons/profile.png"),
             ),
-
-            // backgroundImage:              ),
           ),
         ],
       ),
@@ -66,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                             EventModel data = events[index];
                             return GestureDetector(
                               onTap: () {
-                                
+                                Get.toNamed(RoutesNames.eventScreen, arguments: data);
                               },
                               child: Container(
                                 margin: const EdgeInsets.all(10),
@@ -135,13 +129,13 @@ class _HomePageState extends State<HomePage> {
                           },
                         );
                       } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return Center(
+                          child: Loadings.basic(),
                         );
                       }
                     } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      return Center(
+                        child: Loadings.basic(),
                       );
                     }
                   },

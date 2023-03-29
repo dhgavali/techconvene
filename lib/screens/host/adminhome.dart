@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:techconvene/constants/colors.dart';
+import 'package:techconvene/constants/loading.dart';
 import 'package:techconvene/constants/text_styles.dart';
 import 'package:techconvene/models/event_model.dart';
 import 'package:techconvene/services/events/event_services.dart';
@@ -105,13 +106,13 @@ class AdminHome extends StatelessWidget {
                             },
                           );
                         } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
+                          return  Center(
+                            child: Loadings.basic(),
                           );
                         }
                       } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return  Center(
+                          child:Loadings.basic(),
                         );
                       }
                     },
