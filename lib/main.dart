@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:techconvene/constants/colors.dart';
 import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/router/router.dart';
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             scaffoldBackgroundColor: Colors.white,
             fontFamily: "Poppins",
+            appBarTheme: AppBarTheme(backgroundColor: AppColors.darkBlueColor),
           ),
         );
       },

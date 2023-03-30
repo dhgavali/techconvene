@@ -4,6 +4,7 @@ import 'package:techconvene/constants/colors.dart';
 import 'package:techconvene/controller/landing_controller.dart';
 import 'package:techconvene/screens/users/explorepage.dart';
 import 'package:techconvene/screens/users/homepage.dart';
+import 'package:techconvene/screens/users/notifications.dart';
 import 'package:techconvene/screens/users/profile.dart';
 import 'package:techconvene/screens/users/saved_events.dart';
 import 'package:techconvene/screens/users/settingspage.dart';
@@ -84,11 +85,11 @@ class LandingPage extends StatelessWidget {
           buildBottomNavigationMenu(context, landingPageController),
       body: Obx(() => IndexedStack(
             index: landingPageController.tabIndex.value,
-            children: [
+            children: const [
               HomePage(),
-              const ExplorePage(),
-              const SavedEventsPage(),
-              const SettingsPage(),
+              ExplorePage(),
+              NotificationsPage(),
+              SettingsPage(),
             ],
           )),
     ));

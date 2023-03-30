@@ -15,6 +15,7 @@ import 'package:techconvene/screens/host/post_event/step_one.dart';
 import 'package:techconvene/screens/users/event_screen.dart';
 import 'package:techconvene/screens/users/landing.dart';
 import 'package:techconvene/screens/users/homepage.dart';
+import 'package:techconvene/screens/users/notifications.dart';
 import 'package:techconvene/screens/users/profile.dart';
 
 class AppRoutes {
@@ -60,6 +61,11 @@ class AppRoutes {
     GetPage(
       name: RoutesNames.profilePage,
       page: () => ProfilePage(),
+    ),
+
+    GetPage(
+      name: RoutesNames.userNotification,
+      page: () => const NotificationsPage(),
     ),
 
     // adminpages

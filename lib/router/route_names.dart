@@ -15,6 +15,7 @@ class RoutesNames {
   static const String updateScreen = "/update";
   static const String landingPage = "/landing";
   static const String profilePage = "/profile";
+  static const String userNotification = "/userNotifications";
 
   // admin screens
   static const String adminLanding = "/adminLanding";

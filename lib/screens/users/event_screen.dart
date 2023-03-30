@@ -81,15 +81,15 @@ class EventScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SvgPicture.asset(
-                    "assets/icons/google.svg",
+                    "assets/icons/instagram.svg",
                     width: 40,
                   ),
                   SvgPicture.asset(
-                    "assets/icons/google.svg",
+                    "assets/icons/website.svg",
                     width: 40,
                   ),
                   SvgPicture.asset(
-                    "assets/icons/google.svg",
+                    "assets/icons/website.svg",
                     width: 40,
                   ),
                   SvgPicture.asset(
@@ -98,7 +98,10 @@ class EventScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            SizedBox(
+              height: 100,
+            ),
           ],
         ),
       )),

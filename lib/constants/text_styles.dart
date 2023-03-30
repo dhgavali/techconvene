@@ -73,6 +73,18 @@ class MyTexts {
     );
   }
 
+  static Widget h3(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontFamily: poppinsFont,
+        fontWeight: FontWeight.w600,
+        fontSize: 18.sp,
+        color: AppColors.darkBlueColor,
+      ),
+    );
+  }
+
   static Widget h4(String text, {Color txtColor = AppColors.black}) {
     return Text(
       text,
