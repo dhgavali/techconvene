@@ -55,11 +55,11 @@ class LandingPage extends StatelessWidget {
               icon: Container(
                 margin: const EdgeInsets.only(bottom: 7),
                 child: const Icon(
-                  Icons.bookmark,
+                  Icons.notifications_active,
                   size: 20.0,
                 ),
               ),
-              label: 'Saved',
+              label: 'Notifications',
               // backgroundColor: AppColors.btmNavColor,
             ),
             BottomNavigationBarItem(

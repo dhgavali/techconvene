@@ -73,14 +73,14 @@ class MyTexts {
     );
   }
 
-  static Widget h4(String text) {
+  static Widget h4(String text, {Color txtColor = AppColors.black}) {
     return Text(
       text,
       style: TextStyle(
         fontFamily: poppinsFont,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w400,
         fontSize: 14.sp,
-        color: AppColors.darkBlueColor,
+        color: txtColor,
       ),
     );
   }

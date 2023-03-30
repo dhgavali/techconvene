@@ -19,51 +19,53 @@ class AdminLanding extends StatelessWidget {
       color: Colors.white, fontWeight: FontWeight.w500, fontSize: 12);
 
   buildBottomNavigationMenu(context, landingPageController) {
-    return Obx(() => BottomNavigationBar(
-          showUnselectedLabels: true,
-          showSelectedLabels: true,
-          onTap: landingPageController.changeTabIndex,
-          currentIndex: landingPageController.tabIndex.value,
-          backgroundColor: AppColors.btmNavColor,
-          unselectedItemColor: Colors.white.withOpacity(0.5),
-          selectedItemColor: Colors.white,
-          unselectedLabelStyle: unselectedLabelStyle,
-          selectedLabelStyle: selectedLabelStyle,
-          items: [
-            BottomNavigationBarItem(
-              icon: Container(
-                margin: const EdgeInsets.only(bottom: 7),
-                child: const Icon(
-                  Icons.home,
-                  size: 20.0,
-                ),
+    return Obx(
+      () => BottomNavigationBar(
+        showUnselectedLabels: true,
+        showSelectedLabels: true,
+        onTap: landingPageController.changeTabIndex,
+        currentIndex: landingPageController.tabIndex.value,
+        backgroundColor: AppColors.btmNavColor,
+        unselectedItemColor: Colors.white.withOpacity(0.5),
+        selectedItemColor: Colors.white,
+        unselectedLabelStyle: unselectedLabelStyle,
+        selectedLabelStyle: selectedLabelStyle,
+        items: [
+          BottomNavigationBarItem(
+            icon: Container(
+              margin: const EdgeInsets.only(bottom: 7),
+              child: const Icon(
+                Icons.home,
+                size: 20.0,
               ),
-              label: 'Home',
-              backgroundColor: AppColors.btmNavColor,
             ),
-            BottomNavigationBarItem(
-              icon: Container(
-                margin: const EdgeInsets.only(bottom: 7),
-                child: const Icon(
-                  Icons.add_a_photo,
-                  size: 20.0,
-                ),
+            label: 'Home',
+            backgroundColor: AppColors.btmNavColor,
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              margin: const EdgeInsets.only(bottom: 7),
+              child: const Icon(
+                Icons.add_a_photo,
+                size: 20.0,
               ),
-              label: 'Post Event',
-              // backgroundColor: AppColors.btmNavColor,
             ),
-            BottomNavigationBarItem(
-              icon: Container(
-                margin: const EdgeInsets.only(bottom: 7),
-                child: const Icon(
-                  Icons.person,
-                  size: 20.0,
-                ),
+            label: 'Post Event',
+            // backgroundColor: AppColors.btmNavColor,
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              margin: const EdgeInsets.only(bottom: 7),
+              child: const Icon(
+                Icons.person,
+                size: 20.0,
               ),
-              label: 'Profile',
             ),
-          ],
-        ));
+            label: 'Profile',
+          ),
+        ],
+      ),
+    );
   }
 
   @override

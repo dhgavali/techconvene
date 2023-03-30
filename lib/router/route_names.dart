@@ -14,10 +14,11 @@ class RoutesNames {
   static const String festivalScreen = "/festivals";
   static const String updateScreen = "/update";
   static const String landingPage = "/landing";
+  static const String profilePage = "/profile";
 
   // admin screens
   static const String adminLanding = "/adminLanding";
   static const String adminHome = "/adminhome";
   static const String eventforms = "/eventforms";
-  static const String selectposter= "/selectposter";
+  static const String selectposter = "/selectposter";
 }

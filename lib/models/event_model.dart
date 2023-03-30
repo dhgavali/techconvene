@@ -7,6 +7,7 @@ class EventModel {
   final String posterUrl;
   final String uid;
   final String location;
+  final String eventMode;
 
   EventModel({
     required this.eventname,
@@ -17,6 +18,7 @@ class EventModel {
     required this.posterUrl,
     required this.uid,
     required this.location,
+    required this.eventMode,
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class EventModel {
       posterUrl: json['posterUrl'],
       uid: json['uid'],
       location: json['location'],
+      eventMode: json['eventMode'] ?? "null",
     );
   }
 

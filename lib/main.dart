@@ -28,9 +28,10 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           defaultTransition: Transition.leftToRight,
           debugShowCheckedModeBanner: false,
-          initialRoute:RoutesNames.authPage,
+          initialRoute: RoutesNames.authPage,
           getPages: AppRoutes.routes,
           theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
             fontFamily: "Poppins",
           ),
         );

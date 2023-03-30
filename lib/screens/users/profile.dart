@@ -1,35 +1,5 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:techconvene/router/route_names.dart';
-
-// import '../../services/auth.dart';
-
-// class ProfilePage extends StatelessWidget {
-//   const ProfilePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: ElevatedButton(
-//             onPressed: () async {
-//               await AuthMethods().signOut();
-//               // setState(() {
-//               //   isloading = !isloading;
-//               // });
-//               Get.offAllNamed(RoutesNames.loginScreen);
-//             },
-//             child: Text("Logout")),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:techconvene/constants/colors.dart';
-import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/services/auth.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -107,6 +77,7 @@ class ProfileCard extends StatelessWidget {
       width: width * 0.8,
       child: Card(
         elevation: 4.0,
+        color: AppColors.greyColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),

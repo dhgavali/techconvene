@@ -31,13 +31,18 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            child: CircleAvatar(
-              minRadius: 25.h,
-              maxRadius: 25.h,
-              backgroundColor: Colors.red,
-              backgroundImage: const AssetImage("assets/icons/profile.png"),
+          InkWell(
+            onTap: () {
+              Get.toNamed(RoutesNames.profilePage);
+            },
+            child: Container(
+              padding: const EdgeInsets.all(10.0),
+              child: CircleAvatar(
+                minRadius: 25.h,
+                maxRadius: 25.h,
+                backgroundColor: Colors.red,
+                backgroundImage: const AssetImage("assets/icons/profile.png"),
+              ),
             ),
           ),
         ],
@@ -60,7 +65,8 @@ class _HomePageState extends State<HomePage> {
                             EventModel data = events[index];
                             return GestureDetector(
                               onTap: () {
-                                Get.toNamed(RoutesNames.eventScreen, arguments: data);
+                                Get.toNamed(RoutesNames.eventScreen,
+                                    arguments: data);
                               },
                               child: Container(
                                 margin: const EdgeInsets.all(10),
