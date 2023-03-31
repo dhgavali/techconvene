@@ -23,4 +23,24 @@ class UsersDb {
       return false;
     }
   }
+
+  static Future<Map<String, dynamic>?> getUserData(String emailId) async {
+    try {
+      final QuerySnapshot result = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: emailId)
+          .get();
+
+      final List<QueryDocumentSnapshot> documents = result.docs;
+      if (documents.isEmpty) {
+        // await _ref.add(data);
+        print("document is emtpy");
+        return {};
+      } else {
+        print("already present data");
+        print(documents[0].data());
+        return {};
+      }
+    } catch (e) {}
+  }
 }

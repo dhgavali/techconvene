@@ -3,7 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loadings {
   static Widget basic() {
-    return SpinKitDancingSquare(
+    return SpinKitThreeBounce(
       color: Colors.deepPurple[700],
       size: 50.0,
     );

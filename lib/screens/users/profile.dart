@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:techconvene/constants/colors.dart';
+import 'package:techconvene/constants/loading.dart';
+import 'package:techconvene/controller/auth_controller.dart';
+import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/services/auth.dart';
+import 'package:techconvene/services/users/users_db.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -14,7 +19,8 @@ class ProfilePage extends StatelessWidget {
         Center(
           child: IconButton(
             onPressed: () async {
-              await AuthMethods().signOut();
+              //
+              UsersDb.getUserData("dhiraj@gmail.com");
             },
             icon: const Icon(
               Icons.logout,
@@ -25,35 +31,48 @@ class ProfilePage extends StatelessWidget {
       ]),
       body: Container(
         width: width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            SizedBox(height: 20),
-            CircleAvatar(
-              radius: 60,
-              backgroundImage: NetworkImage(
-                'https://i.pravatar.cc/300',
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'John Doe',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Flutter Developer',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-            Divider(height: 20),
-            ProfileCard(totalEventsParticipated: 20, rank: 5),
-          ],
+        child: FutureBuilder(
+          future: Future.delayed(Duration(seconds: 2)),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasData) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: const [
+                    SizedBox(height: 20),
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundImage: NetworkImage(
+                        'https://i.pravatar.cc/300',
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'John Doe',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Flutter Developer',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Divider(height: 20),
+                    ProfileCard(totalEventsParticipated: 20, rank: 5),
+                  ],
+                );
+              } else {
+                return Loadings.basic();
+              }
+            } else {
+              return Loadings.basic();
+            }
+          },
         ),
       ),
     );
