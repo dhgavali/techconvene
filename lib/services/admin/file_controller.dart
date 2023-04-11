@@ -17,7 +17,7 @@ class FileController extends GetxController {
   @override
   void onClose() {
     poster = null;
-    
+
     // TODO: implement onClose
     super.onClose();
   }

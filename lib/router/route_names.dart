@@ -22,4 +22,5 @@ class RoutesNames {
   static const String adminHome = "/adminhome";
   static const String eventforms = "/eventforms";
   static const String selectposter = "/selectposter";
+  static const String eventDetails = "/eventDetails";
 }

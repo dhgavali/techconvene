@@ -10,6 +10,7 @@ import 'package:techconvene/screens/auth/onboarding.dart';
 import 'package:techconvene/screens/auth/signup_page.dart';
 import 'package:techconvene/screens/host/adminLanding.dart';
 import 'package:techconvene/screens/host/adminhome.dart';
+import 'package:techconvene/screens/host/post_event/event_details.dart';
 import 'package:techconvene/screens/host/post_event/select_poster.dart';
 import 'package:techconvene/screens/host/post_event/step_one.dart';
 import 'package:techconvene/screens/users/event_screen.dart';
@@ -93,6 +94,10 @@ class AppRoutes {
     GetPage(
       name: RoutesNames.eventScreen,
       page: () => const EventScreen(),
+    ),
+    GetPage(
+      name: RoutesNames.eventDetails,
+      page: () => const EventDetails(),
     ),
   ];
 }

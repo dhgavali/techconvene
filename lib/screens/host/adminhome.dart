@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:techconvene/constants/colors.dart';
 import 'package:techconvene/constants/loading.dart';
 import 'package:techconvene/constants/text_styles.dart';
 import 'package:techconvene/models/event_model.dart';
+import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/services/events/event_services.dart';
 
 class AdminHome extends StatelessWidget {
@@ -40,79 +42,85 @@ class AdminHome extends StatelessWidget {
                             itemCount: events!.length,
                             itemBuilder: (BuildContext context, int index) {
                               EventModel data = events[index];
-                              return Container(
-                                margin: const EdgeInsets.all(10),
-                                width: width * 0.8,
-                                height: width * 0.4,
-                                decoration: BoxDecoration(
-                                  color: AppColors.whiteColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: const Offset(
-                                          0, 3), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 35.h,
-                                    ),
-                                    Image.network(
-                                      data.posterUrl,
-                                      width: width * 0.15,
-                                    ),
-                                    SizedBox(
-                                      width: 35.h,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        MyTexts.h2(data.eventname),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            const Icon(Icons.calendar_month),
-                                            SizedBox(
-                                              width: 5.h,
-                                            ),
-                                            MyTexts.h4(data.eventDate),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            const Icon(Icons.currency_rupee),
-                                            SizedBox(
-                                              width: 5.h,
-                                            ),
-                                            MyTexts.h4(data.prizes),
-                                          ],
-                                        ),
-                                      ],
-                                    )
-                                  ],
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(RoutesNames.eventDetails,
+                                      arguments: data);
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(10),
+                                  width: width * 0.8,
+                                  height: width * 0.4,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whiteColor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: const Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 35.h,
+                                      ),
+                                      Image.network(
+                                        data.posterUrl,
+                                        width: width * 0.15,
+                                      ),
+                                      SizedBox(
+                                        width: 35.h,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          MyTexts.h2(data.eventname),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              const Icon(Icons.calendar_month),
+                                              SizedBox(
+                                                width: 5.h,
+                                              ),
+                                              MyTexts.h4(data.eventDate),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              const Icon(Icons.currency_rupee),
+                                              SizedBox(
+                                                width: 5.h,
+                                              ),
+                                              MyTexts.h4(data.prizes),
+                                            ],
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               );
                             },
                           );
                         } else {
-                          return  Center(
+                          return Center(
                             child: Loadings.basic(),
                           );
                         }
                       } else {
-                        return  Center(
-                          child:Loadings.basic(),
+                        return Center(
+                          child: Loadings.basic(),
                         );
                       }
                     },

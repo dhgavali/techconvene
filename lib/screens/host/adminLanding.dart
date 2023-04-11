@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:techconvene/constants/colors.dart';
 import 'package:techconvene/controller/adminLand_controller.dart';
 import 'package:techconvene/screens/host/adminhome.dart';
+import 'package:techconvene/screens/host/analytics.dart';
 import 'package:techconvene/screens/host/hostProfile.dart';
 import 'package:techconvene/screens/host/post_event/event_form.dart';
 import 'package:techconvene/screens/host/post_event/step_one.dart';
@@ -57,6 +58,17 @@ class AdminLanding extends StatelessWidget {
             icon: Container(
               margin: const EdgeInsets.only(bottom: 7),
               child: const Icon(
+                Icons.analytics,
+                size: 20.0,
+              ),
+            ),
+            label: 'Analytics',
+            backgroundColor: AppColors.btmNavColor,
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              margin: const EdgeInsets.only(bottom: 7),
+              child: const Icon(
                 Icons.person,
                 size: 20.0,
               ),
@@ -81,6 +93,7 @@ class AdminLanding extends StatelessWidget {
             children: [
               const AdminHome(),
               EventForm(),
+              const Analytics(),
               const HostProfile(),
             ],
           )),
