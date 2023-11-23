@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,9 +7,11 @@ import 'package:techconvene/constants/loading.dart';
 import 'package:techconvene/constants/text_field.dart';
 import 'package:techconvene/constants/text_styles.dart';
 import 'package:techconvene/controller/auth_controller.dart';
+import 'package:techconvene/models/user_model.dart';
 import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/screens/auth/widgets/auth_label_widget.dart';
 import 'package:techconvene/screens/widgets/auth_widgets.dart';
+import 'package:techconvene/services/users/users_db.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
@@ -87,7 +90,52 @@ class SignupScreen extends StatelessWidget {
                                         _password.text.toString();
                                     controller.fullname =
                                         _fullname.text.toString();
-                                    await controller.signup(context);
+                                    try {
+                                      Map<String, dynamic> usersdata = {
+                                        "email": _email.text
+                                            .toString()
+                                            .toLowerCase(),
+                                        "name": _fullname.text.toString(),
+                                        "mobile": _mobile.text,
+                                      };
+                                      UserModel userModel = UserModel(
+                                        uid:
+                                            '', // Set uid to an empty string for now; it will be updated after signup
+                                        name: _fullname.text.toString(),
+                                        emailId: _email.text
+                                            .toString()
+                                            .toLowerCase(),
+                                        mobileNo: _mobile.text,
+                                      );
+
+                                      UserCredential? user =
+                                          await controller.signup(context);
+                                      if (user != null) {
+                                        userModel.uid = user.user!.uid;
+                                        //  push data to db
+
+                                        bool res =
+                                            await UsersDb.addUser(userModel.toJson());
+                                        if (res) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      "Account created Successfullly")));
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      "Account already exists")));
+                                        }
+
+                                        // Get.offAllNamed(RoutesNames.loginScreen);
+                                      }
+                                    } catch (e) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              content:
+                                                  Text("Failed to sign up")));
+                                    }
                                   }
                                 },
                               ),

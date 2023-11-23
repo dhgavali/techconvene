@@ -24,12 +24,12 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           "On Going Events",
-          style: TextStyle(color: Colors.black),
+        
         ),
+        leading: Container(),
         actions: [
           InkWell(
             onTap: () {

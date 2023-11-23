@@ -47,12 +47,12 @@ class LoginScreen extends StatelessWidget {
                           ),
                           MyTextField(
                             label: "Email id",
-                            controller: TextEditingController(),
+                            controller: _username,
                           ),
                           MyTextField(
                             label: "Password",
                             ispassword: true,
-                            controller: TextEditingController(),
+                            controller: _password,
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
@@ -73,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                               if (_formkey.currentState!.validate()) {
                                 controller.email = _username.text.toString();
                                 controller.password = _password.text.toString();
-
+                              
                                 await controller.login(context);
                               }
                             },

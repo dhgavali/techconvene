@@ -38,11 +38,14 @@ class AuthMethods {
     required String password,
   }) async {
     try {
+
+      print("sign $email $password");
       UserCredential user =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email.trim(),
         password: password.trim(),
       );
+      print("user daata $user");
       return {"user" : user, "status" : 200};
     } on FirebaseAuthException catch (e) {
        print("Error code ${e.code}");
@@ -64,7 +67,6 @@ class AuthMethods {
 // sign up with email and password
   Future<UserCredential?> signUp({
     required BuildContext context,
-    required String fullname,
     required String email,
     required String password,
   }) async {
@@ -74,8 +76,6 @@ class AuthMethods {
         email: email.trim(),
         password: password.trim(),
       );
-
-      
 
       return user;
     } on FirebaseAuthException catch (e) {

@@ -13,7 +13,9 @@ class ExplorePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Explore Events"),
         centerTitle: true,
+      leading: Container(),
       ),
+
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
         child: Column(children: [

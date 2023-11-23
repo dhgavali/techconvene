@@ -13,6 +13,7 @@ class NotificationsPage extends StatelessWidget {
         title: const Text("Notifications"),
         centerTitle: true,
         elevation: 0,
+        leading: Container(),
         actions: const [
           Padding(
             padding: EdgeInsets.all(10.0),

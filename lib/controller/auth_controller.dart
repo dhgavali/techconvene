@@ -46,34 +46,22 @@ else{
     }
   }
 
-  Future<void> signup(BuildContext context) async {
+  Future<UserCredential?> signup(BuildContext context) async {
+    UserCredential? res = null;
     try {
       isLoading.value = true;
       update();
-
-UserCredential? res = await AuthMethods().signUp(
+        res = await AuthMethods().signUp(
         context: context,
         email: email,
-        fullname: fullname,
         password: password,
       );
 
-print(res);
-
-Map<String,dynamic> userdata =  {
-  'uid' : res!.user!.uid,
-  'email' : email,
-  'account_created' : DateTime.now(),
-};
-print('userdata is $userdata');
-      // add data to database
-      // await UsersDb.addUser({'uid'});
-      // Get.offAllNamed(RoutesNames.loginScreen);
     } catch (e) {
-      print(e.toString());
     } finally {
       isLoading.value = false;
       update();
+      return res;
     }
   }
 
@@ -128,8 +116,7 @@ await SharedData.saveRole("admin");
       UserCredential? user = await AuthMethods().signUp(
         context: context,
         email: email,
-        password: password,
-        fullname: fullname,
+        password: password
       );
 
       if (user != null) {
