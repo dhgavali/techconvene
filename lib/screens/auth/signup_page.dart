@@ -91,13 +91,7 @@ class SignupScreen extends StatelessWidget {
                                     controller.fullname =
                                         _fullname.text.toString();
                                     try {
-                                      Map<String, dynamic> usersdata = {
-                                        "email": _email.text
-                                            .toString()
-                                            .toLowerCase(),
-                                        "name": _fullname.text.toString(),
-                                        "mobile": _mobile.text,
-                                      };
+                                    
                                       UserModel userModel = UserModel(
                                         uid:
                                             '', // Set uid to an empty string for now; it will be updated after signup

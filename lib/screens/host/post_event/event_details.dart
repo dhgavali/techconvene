@@ -88,7 +88,7 @@ class EventDetails extends StatelessWidget {
               ),
             ),
             eventDetailRow(
-              label: data.eventMode,
+              label: data.eventMode ?? "Online",
               subtitle: "Mode",
               icon: Icons.location_on,
             ),
@@ -98,7 +98,7 @@ class EventDetails extends StatelessWidget {
               icon: Icons.location_on,
             ),
             eventDetailRow(
-              label: data.prizes,
+              label: data.prizes ?? "-",
               subtitle: "Prize",
               icon: Icons.currency_rupee,
             ),

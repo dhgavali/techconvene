@@ -18,8 +18,8 @@ factory UserModel.fromJson(Map<String, dynamic> json) {
      mobileNo: json['mobile'],
      bio: json['bio'],
      totalEventsParticipated: json['totalEventsParticipated'],
-    eventParticipated: json['eventParticipated']
-    );
+    eventParticipated:(json['eventParticipated'] as List<dynamic>?)?.cast<String?>(),
+     );
   }
 
   

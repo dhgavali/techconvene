@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:techconvene/constants/colors.dart';
 import 'package:techconvene/constants/text_styles.dart';
 import 'package:techconvene/models/event_model.dart';
+import 'package:techconvene/router/route_names.dart';
+import 'package:techconvene/services/events/event_services.dart';
 
 class EventScreen extends StatelessWidget {
   const EventScreen({super.key});
@@ -16,11 +19,46 @@ class EventScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: ElevatedButton(
-        onPressed: () {
-          // TODO: Navigate to Event URl
-        },
-        child: Text("Register"),
-      ),
+  onPressed: () async {
+    // TODO: Navigate to Event URL
+    print("button clicked ${data.participants}");
+
+    String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+
+    if (data.participants != null && data.participants!.contains(currentUserUid)) {
+      // User has already participated, show a message or handle accordingly
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Already registered for the event!")));
+    } else {
+      // User has not participated, proceed with registration
+      bool res = await EventService.registerUserForEvent(data.uid, currentUserUid);
+
+      if (res) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Registered for the event successfully")));
+        Get.offAndToNamed(RoutesNames.landingPage);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to register for the event!")));
+      }
+    }
+  },
+  child: Text(data.participants != null && data.participants!.contains(FirebaseAuth.instance.currentUser!.uid)
+      ? "Already Registered"
+      : "Register"),
+      style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+      if (states.contains(MaterialState.pressed)) {
+        return Colors.grey.shade800;
+      } else if (data.participants != null && data.participants!.contains(FirebaseAuth.instance.currentUser!.uid)) {
+     
+        return Colors.grey.shade800;
+      } else {
+        
+        return Colors.blue;
+      }
+    }),
+))
+
+,
+
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
@@ -50,7 +88,7 @@ class EventScreen extends StatelessWidget {
               ),
             ),
             eventDetailRow(
-              label: data.eventMode,
+              label: data.eventMode ?? "Online",
               subtitle: "Mode",
               icon: Icons.location_on,
             ),
@@ -60,7 +98,7 @@ class EventScreen extends StatelessWidget {
               icon: Icons.location_on,
             ),
             eventDetailRow(
-              label: data.prizes,
+              label: data.prizes ?? "-",
               subtitle: "Prize",
               icon: Icons.currency_rupee,
             ),

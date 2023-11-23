@@ -75,5 +75,45 @@ static Future<UserModel?> getUserData(String userid) async {
       return false;
     }
   }
+
+
+   static Future<bool> registerUserForEvent(String eventId, String userId) async {
+    try {
+      // Reference to the specific event document
+      DocumentReference eventRef = _ref.doc(userId.trim());
+
+      // Update the participants field by adding the user ID to the array
+      await eventRef.update({
+        'eventParticipated': FieldValue.arrayUnion([eventId]),
+      });
+
+      print('User $userId registered for event $eventId successfully.');
+      return true;
+    } catch (e) {
+      print('Error registering user for event: $e');
+      return false;
+      // Handle error as needed
+    }
+  }
+
+
+   static Future<bool> unRegisterUserForEvent(String eventId, String userId) async {
+    try {
+      // Reference to the specific event document
+      DocumentReference eventRef = _ref.doc(userId.trim());
+
+      // Update the participants field by adding the user ID to the array
+      await eventRef.update({
+        'eventParticipated': FieldValue.arrayRemove([eventId]),
+      });
+
+      print('User $userId registered for event $eventId successfully.');
+      return true;
+    } catch (e) {
+      print('Error registering user for event: $e');
+      return false;
+      // Handle error as needed
+    }
+  }
 }
 

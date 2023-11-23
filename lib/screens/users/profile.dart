@@ -129,7 +129,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             Divider(height: 20),
-           const ProfileCard(totalEventsParticipated: 20, rank: 5),
+            ProfileCard(totalEventsParticipated: user.eventParticipated == null ? 0 : user.eventParticipated!.length, rank: 5),
           ],
         );
       } else {

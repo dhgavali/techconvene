@@ -1,24 +1,26 @@
 class EventModel {
-  final String eventname;
-  final String eventDate;
-  final String club;
-  final String prizes;
-  final String description;
-  final String posterUrl;
-  final String uid;
-  final String location;
-  final String eventMode;
+   String eventname;
+   String eventDate;
+   String? club;
+   String? prizes;
+   String description;
+   String posterUrl;
+   String uid;
+   String location;
+   String? eventMode;
+   List<String?>? participants;
 
   EventModel({
     required this.eventname,
     required this.eventDate,
-    required this.club,
-    required this.prizes,
-    required this.description,
     required this.posterUrl,
+    required this.description,
     required this.uid,
     required this.location,
-    required this.eventMode,
+    this.eventMode,
+     this.club,
+     this.prizes,
+     this.participants,
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
@@ -29,9 +31,10 @@ class EventModel {
       prizes: json['prizes'],
       description: json['description'],
       posterUrl: json['posterUrl'],
-      uid: json['uid'],
+      uid: json['eventId'],
       location: json['location'],
       eventMode: json['eventMode'] ?? "null",
+      participants: (json['participants'] as List<dynamic>?)?.cast<String?>(),
     );
   }
 
@@ -45,47 +48,8 @@ class EventModel {
       'posterUrl': posterUrl,
       'uid': uid,
       'location': location,
+      'participants' : participants
     };
+
   }
-  // factory EventModel.fromJson(Map<String, dynamic> data) {
-  //   eventname = data['eventname'];
-  // }
-  // Map<String, dynamic> toMap() {
-  //   return {
-  //     'eventname': eventname,
-  //     'eventdate': eventDate,
-  //     'club': club,
-  //     'prizes': prizes,
-  //     'location': location,
-  //     'posterUrl': posterUrl,
-  //     'description': description,
-  //     'uid': uid,
-  //   };
-  // }
 }
-
-
-
-// class Address {
-//   final String streetName;
-//   final String buildingName;
-//   final String cityName;
-
-//   Address(
-//       {required this.streetName,
-//       required this.buildingName,
-//       required this.cityName});
-
-//   Map<String, dynamic> toMap() {
-//     return {
-//       'streetName': streetName,
-//       'buildingName': buildingName,
-//       'cityName': cityName,
-//     };
-//   }
-
-//   Address.fromMap(Map<String, dynamic> addressMap)
-//       : streetName = addressMap["streetName"],
-//         buildingName = addressMap["buildingName"],
-//         cityName = addressMap["cityName"];
-// }

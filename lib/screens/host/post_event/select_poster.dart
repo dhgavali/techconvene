@@ -113,15 +113,17 @@ final loadingController =Get.put(LoadingController());
 
                                 final String path =
                                     await uploadController.uploadImage(img);
-                                Map<String, dynamic> eventdata = Get.arguments;
-                                eventdata['posterUrl'] = path;
-                                eventdata['eventId'] = eventId;
-                                eventdata['uid'] =
-                                    FirebaseAuth.instance.currentUser!.uid;
+                                EventModel eventModel = Get.arguments;
+                                eventModel.uid = FirebaseAuth.instance.currentUser!.uid;
+                                eventModel.posterUrl = path;
+                                
+                                // eventdata['posterUrl'] = path;
+                                // eventdata['eventId'] = eventId;
+                                // eventdata['uid'] =
+                                    // FirebaseAuth.instance.currentUser!.uid;
                                
-                               
-                                bool res = await AdminDb.postEvent(eventdata);
-                                bool res2 = await AdminDb.storeEventIdInUserCollection(eventdata['uid'], eventId);
+                                bool res = await AdminDb.postEvent(eventModel.toJson());
+                                bool res2 = await AdminDb.storeEventIdInUserCollection(eventModel.uid, eventId);
                                 if (res && res2) {
                                   print("successfully uploaded event");
  await Future.delayed(Duration(seconds: 2));

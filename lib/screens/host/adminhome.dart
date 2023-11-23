@@ -102,7 +102,7 @@ class AdminHome extends StatelessWidget {
                                               SizedBox(
                                                 width: 5.h,
                                               ),
-                                              MyTexts.h4(data.prizes),
+                                              MyTexts.h4(data.prizes ?? "-"),
                                             ],
                                           ),
                                         ],

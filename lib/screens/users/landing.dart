@@ -87,7 +87,7 @@ class LandingPage extends StatelessWidget {
             index: landingPageController.tabIndex.value,
             children: const [
               HomePage(),
-              ExplorePage(),
+              RegisteredEventsPage(),
               NotificationsPage(),
               SettingsPage(),
             ],

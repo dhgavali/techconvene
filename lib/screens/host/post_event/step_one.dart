@@ -5,6 +5,7 @@ import 'package:techconvene/constants/buttons.dart';
 import 'package:techconvene/constants/text_field.dart';
 import 'package:techconvene/constants/text_styles.dart';
 import 'package:techconvene/constants/validators.dart';
+import 'package:techconvene/models/event_model.dart';
 import 'package:techconvene/router/route_names.dart';
 
 class EventForm extends StatelessWidget {
@@ -57,17 +58,18 @@ class EventForm extends StatelessWidget {
                     label: "Continue",
                     onpress: () {
                       if (_formkey.currentState!.validate()) {
+                        EventModel eventModel = EventModel(eventname:  _eventName.text.toString(), eventDate:  _date.text.toString(), club: "club", prizes: _prizes.text.toString(), description: _description.text.toString(), posterUrl: "", uid: "", location: _pincode.text.toString(), eventMode: "");
                         Map<String, dynamic> eventdata = {
                           "eventname": _eventName.text.toString(),
                           "description": _description.text.toString(),
                           "eventDate": _date.text.toString(),
                           "prizes": _prizes.text.toString(),
                           "location": _pincode.text.toString(),
-                          "club": "abc",
+                          "club" : "club"
                         };
 
                         Get.toNamed(RoutesNames.selectposter,
-                            arguments: eventdata);
+                            arguments: eventModel);
                       }
                     }),
               ],
