@@ -30,7 +30,7 @@ class EventScreen extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Already registered for the event!")));
     } else {
       // User has not participated, proceed with registration
-      bool res = await EventService.registerUserForEvent(data.uid, currentUserUid);
+      bool res = await EventService.registerUserForEvent(data.uid!, currentUserUid);
 
       if (res) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Registered for the event successfully")));
@@ -103,7 +103,7 @@ class EventScreen extends StatelessWidget {
               icon: Icons.currency_rupee,
             ),
             eventDetailRow(
-              label: data.eventDate,
+              label: data.startDate.toString().split(" ").first,
               subtitle: "Date",
               icon: Icons.calendar_month,
             ),

@@ -16,6 +16,7 @@ class AdminHome extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(title: Text("Ongoing Events"),  leading: Container()),
       body: SafeArea(
         child: Container(
             padding: EdgeInsets.symmetric(
@@ -24,9 +25,6 @@ class AdminHome extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Container(
-                  child: MyTexts.h2("Ongoing Events"),
-                ),
                 Expanded(
                   child: FutureBuilder<List<EventModel>>(
                     future: EventService.getHostEvents(
@@ -91,7 +89,7 @@ class AdminHome extends StatelessWidget {
                                               SizedBox(
                                                 width: 5.h,
                                               ),
-                                              MyTexts.h4(data.eventDate),
+                                              MyTexts.h4(data.startDate.toString().split(" ").first),
                                             ],
                                           ),
                                           Row(
@@ -126,25 +124,7 @@ class AdminHome extends StatelessWidget {
                     },
                   ),
                 ),
-                Container(
-                  child: MyTexts.h2("Past Events"),
-                ),
-                SizedBox(
-                  height: width * 0.3,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: 3,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        width: width * 0.4,
-                        height: width * 0.2,
-                        margin: const EdgeInsets.all(10),
-                        color: AppColors.btmNavColor,
-                      );
-                    },
-                  ),
-                ),
+                
               ],
             )),
       ),

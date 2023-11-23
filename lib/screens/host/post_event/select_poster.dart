@@ -116,34 +116,34 @@ final loadingController =Get.put(LoadingController());
                                 EventModel eventModel = Get.arguments;
                                 eventModel.uid = FirebaseAuth.instance.currentUser!.uid;
                                 eventModel.posterUrl = path;
-                                
+                                print(eventModel);
                                 // eventdata['posterUrl'] = path;
                                 // eventdata['eventId'] = eventId;
                                 // eventdata['uid'] =
                                     // FirebaseAuth.instance.currentUser!.uid;
                                
-                                bool res = await AdminDb.postEvent(eventModel.toJson());
-                                bool res2 = await AdminDb.storeEventIdInUserCollection(eventModel.uid, eventId);
-                                if (res && res2) {
-                                  print("successfully uploaded event");
- await Future.delayed(Duration(seconds: 2));
+//                                 bool res = await AdminDb.postEvent(eventModel.toJson());
+//                                 bool res2 = await AdminDb.storeEventIdInUserCollection(eventModel.uid, eventId);
+//                                 if (res && res2) {
+//                                   print("successfully uploaded event");
+//  await Future.delayed(Duration(seconds: 2));
 
       // Hide loading
-      loadingController.hideLoading();
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Successfully Uploaded Event!")));
-                                  // Get.toNamed(RoutesNames.adminHome);
-                                   Get.offAllNamed(RoutesNames.adminLanding);
+      // loadingController.hideLoading();
+      //                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Successfully Uploaded Event!")));
+      //                             // Get.toNamed(RoutesNames.adminHome);
+      //                              Get.offAllNamed(RoutesNames.adminLanding);
 
-                                } else {
-                                  print("failed to uplaod event");
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to  Uploaded Event!")));
-                                  await Future.delayed(Duration(seconds: 2));
+      //                           } else {
+      //                             print("failed to uplaod event");
+      //                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to  Uploaded Event!")));
+      //                             await Future.delayed(Duration(seconds: 2));
 
-      // Hide loading
-      loadingController.hideLoading();
-                                  // Get.toNamed(RoutesNames.adminHome);
-                                   Get.offAllNamed(RoutesNames.adminLanding);
-                                }
+      // // Hide loading
+      // loadingController.hideLoading();
+      //                             // Get.toNamed(RoutesNames.adminHome);
+      //                              Get.offAllNamed(RoutesNames.adminLanding);
+      //                           }
 
                                 // image uplaoding to firebase
                               }),

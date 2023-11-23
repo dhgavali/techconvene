@@ -118,7 +118,7 @@ class EventListItem extends StatelessWidget {
         trailing: ElevatedButton(
           onPressed: () async {
             // TODO: Implement unregister method
-            bool res = await EventService.unregisterUserFromEvent(event.uid, FirebaseAuth.instance.currentUser!.uid);
+            bool res = await EventService.unregisterUserFromEvent(event.uid!, FirebaseAuth.instance.currentUser!.uid);
             if (res) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Unregistered from event successfully")));
             Navigator.pop(context);

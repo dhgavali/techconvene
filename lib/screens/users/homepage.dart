@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                                             SizedBox(
                                               width: 5.h,
                                             ),
-                                            MyTexts.h4(data.eventDate),
+                                            MyTexts.h4(data.startDate.toString().split(" ").first),
                                           ],
                                         ),
                                         Row(

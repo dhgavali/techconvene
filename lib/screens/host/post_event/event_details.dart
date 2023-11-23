@@ -103,7 +103,7 @@ class EventDetails extends StatelessWidget {
               icon: Icons.currency_rupee,
             ),
             eventDetailRow(
-              label: data.eventDate,
+              label: data.startDate.toString().split(" ").first,
               subtitle: "Date",
               icon: Icons.calendar_month,
             ),
