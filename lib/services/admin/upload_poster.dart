@@ -6,10 +6,36 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class Uploading {
+
+  Future<void> requestBothPermissions() async {
+  var storageStatus = await Permission.storage.status;
+  var cameraStatus = await Permission.camera.status;
+
+  if (storageStatus.isDenied || cameraStatus.isDenied) {
+    // You can request both permissions
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.storage,
+      Permission.camera,
+    ].request();
+    
+    storageStatus = statuses[Permission.storage] ?? PermissionStatus.denied;
+    cameraStatus = statuses[Permission.camera] ?? PermissionStatus.denied;
+  }
+
+  if (storageStatus.isGranted && cameraStatus.isGranted) {
+    // Permissions granted for both
+  } else {
+    // Permissions denied for one or both
+  }
+}
+
   Future<File?> uploadImage() async {
     //Check Permissions
-    late PermissionStatus storagepermission;
-    late PermissionStatus photopermission;
+     PermissionStatus? storagepermission;
+    PermissionStatus? photopermission;
+    if(Platform.isIOS){
+      await   requestBothPermissions();
+    }
     if (Platform.isAndroid) {
       final androidInfo = await DeviceInfoPlugin().androidInfo;
       if (androidInfo.version.sdkInt <= 32) {
@@ -18,7 +44,7 @@ class Uploading {
         photopermission = await Permission.photos.status;
       }
     }
-    if (storagepermission.isGranted || photopermission.isGranted) {
+    if (storagepermission == null || photopermission!.isGranted) {
       try {
         ImagePicker imagePicker = ImagePicker();
         XFile? pickedFile = await imagePicker.pickImage(

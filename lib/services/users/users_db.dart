@@ -13,7 +13,7 @@ class UsersDb {
           .get();
       final List<DocumentSnapshot> documents = result.docs;
       if (documents.isEmpty) {
-        await _ref.add(data);
+        await _ref.doc(data['uid']).set(data);
         return true;
       } else {
         print("already present data");

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:techconvene/constants/buttons.dart';
-import 'package:techconvene/constants/colors.dart';
 import 'package:techconvene/constants/loading.dart';
 import 'package:techconvene/constants/text_field.dart';
 import 'package:techconvene/constants/text_styles.dart';

@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:techconvene/constants/colors.dart';
+import 'package:techconvene/firebase_options.dart';
 import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/router/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,

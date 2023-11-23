@@ -25,77 +25,79 @@ class HostLogin extends StatelessWidget {
           FocusManager.instance.primaryFocus!.unfocus();
         },
         child: SafeArea(
-          child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: GetBuilder<AuthController>(
-              builder: (controller) => controller.isLoading.value
-                  ? Loadings.basic()
-                  : Form(
-                      key: _formkey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MyTexts.h1("Event Organizer Login"),
-                          MyTexts.h4(
-                              "Promote Events & Reach to large community of evently"),
-                          SizedBox(
-                            height: 40.h,
-                          ),
-                          MyTextField(
-                            label: "Email id",
-                            controller: _username,
-                          ),
-                          MyTextField(
-                            label: "Password",
-                            ispassword: true,
-                            controller: _password,
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 25.w, vertical: 8.h),
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {
-                                // TODO: Forgot password Function call
-                              },
-                              child: MyTexts.h4(
-                                "Forgot Password ?",
+          child: SingleChildScrollView(
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: GetBuilder<AuthController>(
+                builder: (controller) => controller.isLoading.value
+                    ? Loadings.basic()
+                    : Form(
+                        key: _formkey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MyTexts.h1("Event Organizer Login"), 
+                            MyTexts.h4(
+                                "Promote Events & Reach to large community of evently"),
+                            SizedBox(
+                              height: 40.h,
+                            ),
+                            MyTextField(
+                              label: "Email id",
+                              controller: _username,
+                            ),
+                            MyTextField(
+                              label: "Password",
+                              ispassword: true,
+                              controller: _password,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 25.w, vertical: 8.h),
+                              alignment: Alignment.centerRight,
+                              child: TextButton(
+                                onPressed: () {
+                                  // TODO: Forgot password Function call
+                                },
+                                child: MyTexts.h4(
+                                  "Forgot Password ?",
+                                ),
                               ),
                             ),
-                          ),
-                          PrimaryBtn(
-                            label: "Login",
-                            onpress: () async {
-                              if (_formkey.currentState!.validate()) {
-                                controller.email =
-                                    _username.text.toString().trim();
-                                controller.password =
-                                    _password.text.toString().trim();
-
-                                await controller.hostLogin(context);
-                              }
-                            },
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          PrimaryBtn(
-                            label: "Register with Us",
-                            bgColor: AppColors.black,
-                            onpress: () {
-                              Get.toNamed(RoutesNames.hostsignup);
-                            },
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                        ],
+                            PrimaryBtn(
+                              label: "Login",
+                              onpress: () async {
+                                if (_formkey.currentState!.validate()) {
+                                  controller.email =
+                                      _username.text.toString().trim();
+                                  controller.password =
+                                      _password.text.toString().trim();
+          
+                                  await controller.hostLogin(context);
+                                }
+                              },
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            PrimaryBtn(
+                              label: "Register with Us",
+                              bgColor: AppColors.black,
+                              onpress: () {
+                                Get.toNamed(RoutesNames.hostsignup);
+                              },
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+              ),
             ),
           ),
         ),

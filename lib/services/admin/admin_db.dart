@@ -15,7 +15,7 @@ class AdminDb {
           await _ref.where('email', isEqualTo: data['email']).get();
       final List<DocumentSnapshot> documents = result.docs;
       if (documents.isEmpty) {
-        await _ref.add(data);
+        await _ref.doc(data['uid']).set(data);
         return true;
       } else {
         print("already present data");
@@ -51,17 +51,40 @@ class AdminDb {
     return map;
   }
 
+
+// getting id
+
+static Future<String> getEventId() async{
+   return  _eventref.doc().id;
+}
+static Future<String> getAdminId() async{
+   return  _ref.doc().id;
+}
   // posting event
 
   static Future<bool> postEvent(Map<String, dynamic> eventdata) async {
     try {
-      await _eventref.add(eventdata);
+      print("event data is $eventdata");
+      // await _eventref.add(eventdata);
+      await _eventref.doc(eventdata['eventId']).set(eventdata);
       return true;
     } catch (e) {
       print(e.toString());
       return false;
     }
   }
+
+  static Future<bool> storeEventIdInUserCollection(String userId, String eventId) async {
+  try {
+    await _ref.doc(userId).update({
+      'eventLists': FieldValue.arrayUnion([eventId]),
+    });
+    return true;
+  } catch (e) {
+    print('Error storing eventId in user collection: $e');
+    return false;
+  }
+}
 }
 
 

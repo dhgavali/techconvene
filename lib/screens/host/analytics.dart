@@ -11,6 +11,9 @@ class Analytics extends StatelessWidget {
       appBar: AppBar(
         title: Text("Event Analytics"),
       ),
+      body: FutureBuilder(future: null, builder: (context, snapshot) {
+        return Container();
+      },),
     );
   }
 }

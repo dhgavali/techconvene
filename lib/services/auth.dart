@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:techconvene/router/route_names.dart';
+import 'package:techconvene/services/users/users_db.dart';
 import 'package:techconvene/shared/SharedData.dart';
 import 'package:techconvene/shared/mysnackbar.dart';
 
@@ -31,7 +32,7 @@ class AuthMethods {
 
 //sign in with email and password
 
-  Future<UserCredential?> signIn({
+  Future<Map<String, dynamic>> signIn({
     required BuildContext context,
     required String email,
     required String password,
@@ -42,17 +43,21 @@ class AuthMethods {
         email: email.trim(),
         password: password.trim(),
       );
-      return user;
+      return {"user" : user, "status" : 200};
     } on FirebaseAuthException catch (e) {
+       print("Error code ${e.code}");
+      String msg = "";
       switch (e.code) {
-        case "wrong-password":
-          MyWidgets.showSnackbar(msg: "Email Already in Use", context: context);
-          break;
-        case "user-not-found":
-          MyWidgets.showSnackbar(
-              msg: "Account Does not Exists", context: context);
-          break;
+      case 'wrong-password':
+      msg = "Invalid Password / Username";
+      break;
+      case "user-not-found":
+      msg = "Account does not exists!";
+      break;
       }
+
+
+       return {"user" : null, "status" : 203, "msg" : msg};
     }
   }
 
@@ -69,6 +74,8 @@ class AuthMethods {
         email: email.trim(),
         password: password.trim(),
       );
+
+      
 
       return user;
     } on FirebaseAuthException catch (e) {

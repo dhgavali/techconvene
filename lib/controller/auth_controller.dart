@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/services/admin/admin_db.dart';
 import 'package:techconvene/services/auth.dart';
+import 'package:techconvene/services/users/users_db.dart';
 import 'package:techconvene/shared/SharedData.dart';
 
 class AuthController extends GetxController {
@@ -20,14 +22,22 @@ class AuthController extends GetxController {
       isLoading.value = true;
       update();
       await Future.delayed(const Duration(seconds: 2));
-      await AuthMethods().signIn(
+     Map<String, dynamic> user =  await AuthMethods().signIn(
         context: context,
         email: email,
         password: password,
       );
 
-      await SharedData.saveRole("user");
+if(user['user']!= null){
+    await SharedData.saveRole("user");
       Get.offAllNamed(RoutesNames.landingPage);
+  
+}
+else{
+  if(user['user'] == null){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(user['msg'])));
+  }
+}
     } catch (e) {
       print(e.toString());
     } finally {
@@ -41,13 +51,24 @@ class AuthController extends GetxController {
       isLoading.value = true;
       update();
 
-      await AuthMethods().signUp(
+UserCredential? res = await AuthMethods().signUp(
         context: context,
         email: email,
         fullname: fullname,
         password: password,
       );
-      Get.offAllNamed(RoutesNames.loginScreen);
+
+print(res);
+
+Map<String,dynamic> userdata =  {
+  'uid' : res!.user!.uid,
+  'email' : email,
+  'account_created' : DateTime.now(),
+};
+print('userdata is $userdata');
+      // add data to database
+      // await UsersDb.addUser({'uid'});
+      // Get.offAllNamed(RoutesNames.loginScreen);
     } catch (e) {
       print(e.toString());
     } finally {
@@ -69,16 +90,24 @@ class AuthController extends GetxController {
       print("priting mail : $email");
       bool res = await AdminDb.getHost(email);
       if (res) {
-        UserCredential? user = await AuthMethods().signIn(
+        Map<String,dynamic> user = await AuthMethods().signIn(
           context: context,
           email: email,
           password: password,
         );
 
-        await SharedData.saveRole("admin");
+      if(user['user'] != null){
+await SharedData.saveRole("admin");
         String? data = await SharedData.getRole();
         print(data);
         Get.offAllNamed(RoutesNames.adminLanding);
+      }
+      else{
+        if(user['user'] == null ){
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(user['msg'])));
+        }
+      }
+        
       } else {
         print("Admin not present");
       }

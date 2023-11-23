@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>199022085697-6dtsvnbd1mshlcbia26trl62vpqj3ara.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.199022085697-6dtsvnbd1mshlcbia26trl62vpqj3ara</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>199022085697-rr5rrob4m2o78msihe9ogipinobi1ouj.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDzto6EziPT0WnTkVyqG_lH9x51jmMan6o</string>
+	<key>GCM_SENDER_ID</key>
+	<string>199022085697</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.dhenterrprises.techconvene</string>
+	<key>PROJECT_ID</key>
+	<string>tech-convene</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tech-convene.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:199022085697:ios:215c4be6e8fe5f36e068c0</string>
+</dict>
+</plist>

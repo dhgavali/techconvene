@@ -6,7 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:techconvene/constants/buttons.dart';
 import 'package:techconvene/constants/colors.dart';
+import 'package:techconvene/controller/loading_controller.dart';
 import 'package:techconvene/models/event_model.dart';
+import 'package:techconvene/constants/loading.dart';
+import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/services/admin/admin_db.dart';
 import 'package:techconvene/services/admin/file_controller.dart';
 import 'package:techconvene/services/admin/upload_controller.dart';
@@ -24,13 +27,22 @@ class _SelectPosterState extends State<SelectPoster> {
 
   final fileController = Get.put(FileController());
   final uploadController = Get.put(UploadController());
+final loadingController =Get.put(LoadingController());
 
+  bool isLoading =false;
   @override
   void dispose() {
     // TODO: implement dispose
     fileController.dispose();
     uploadController.dispose();
     super.dispose();
+  }
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
   }
 
   @override
@@ -43,7 +55,10 @@ class _SelectPosterState extends State<SelectPoster> {
         width: size.width,
         child: GetBuilder<FileController>(builder: (controller) {
           File? img = controller.getImage();
-          return Column(
+          return Obx(
+          () => loadingController.isLoading.value
+              ? Loadings.basic()
+               : Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
@@ -93,25 +108,46 @@ class _SelectPosterState extends State<SelectPoster> {
                                         content: Text("Please choose image")));
                               }
                             : () async {
+                              loadingController.showLoading();
+                              String eventId = await AdminDb.getEventId();
+
                                 final String path =
                                     await uploadController.uploadImage(img);
                                 Map<String, dynamic> eventdata = Get.arguments;
                                 eventdata['posterUrl'] = path;
+                                eventdata['eventId'] = eventId;
                                 eventdata['uid'] =
                                     FirebaseAuth.instance.currentUser!.uid;
                                
                                
                                 bool res = await AdminDb.postEvent(eventdata);
-                                if (res) {
+                                bool res2 = await AdminDb.storeEventIdInUserCollection(eventdata['uid'], eventId);
+                                if (res && res2) {
                                   print("successfully uploaded event");
+ await Future.delayed(Duration(seconds: 2));
+
+      // Hide loading
+      loadingController.hideLoading();
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Successfully Uploaded Event!")));
+                                  // Get.toNamed(RoutesNames.adminHome);
+                                   Get.offAllNamed(RoutesNames.adminLanding);
+
                                 } else {
                                   print("failed to uplaod event");
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to  Uploaded Event!")));
+                                  await Future.delayed(Duration(seconds: 2));
+
+      // Hide loading
+      loadingController.hideLoading();
+                                  // Get.toNamed(RoutesNames.adminHome);
+                                   Get.offAllNamed(RoutesNames.adminLanding);
                                 }
+
                                 // image uplaoding to firebase
                               }),
                   ],
                 ),
-              ]);
+              ]));
         }),
       )),
     );
@@ -134,6 +170,7 @@ class _SelectPosterState extends State<SelectPoster> {
             TextButton.icon(
               label: Text("Gallary"),
               onPressed: () async {
+
                 File? poster = await Uploading().uploadImage();
                 if (poster != null) {
                   controller.saveImage(poster);
