@@ -23,4 +23,5 @@ class RoutesNames {
   static const String eventforms = "/eventforms";
   static const String selectposter = "/selectposter";
   static const String eventDetails = "/eventDetails";
+  static const String usersAnalytics = '/userAnalytics';
 }

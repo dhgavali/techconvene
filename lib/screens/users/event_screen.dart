@@ -40,14 +40,18 @@ class EventScreen extends StatelessWidget {
       }
     }
   },
-  child: Text(data.participants != null && data.participants!.contains(FirebaseAuth.instance.currentUser!.uid)
+  child: data.isClosed ? Text("Event Closed") :  Text(data.participants != null && data.participants!.contains(FirebaseAuth.instance.currentUser!.uid)
       ? "Already Registered"
       : "Register"),
       style: ButtonStyle(
     backgroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
       if (states.contains(MaterialState.pressed)) {
         return Colors.grey.shade800;
-      } else if (data.participants != null && data.participants!.contains(FirebaseAuth.instance.currentUser!.uid)) {
+      } 
+      if(data.isClosed){
+        return Colors.red.shade800;
+      }
+      else if (data.participants != null && data.participants!.contains(FirebaseAuth.instance.currentUser!.uid)) {
      
         return Colors.grey.shade800;
       } else {

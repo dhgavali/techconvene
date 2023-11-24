@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:techconvene/constants/buttons.dart';
 import 'package:techconvene/constants/text_styles.dart';
 import 'package:techconvene/models/event_model.dart';
+import 'package:techconvene/router/route_names.dart';
 import 'package:techconvene/screens/users/event_screen.dart';
+import 'package:techconvene/services/admin/admin_db.dart';
 
 class EventDetails extends StatelessWidget {
   const EventDetails({super.key});
@@ -137,8 +140,47 @@ class EventDetails extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+           const SizedBox(
               height: 100,
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                   style: data.isClosed
+      ? ElevatedButton.styleFrom(
+          backgroundColor: Colors.grey.shade800, // Color when closed
+        )
+      : null,
+                child:   Text(data.isClosed ? "Closed" : "Close Registration"),
+                 onPressed: () async{
+                 if(data.isClosed == false){
+                  print("in close");
+                  print(data.uid);
+                   bool res = await AdminDb.closeRegistrations(data.uid!);
+                  if(res){
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Registrations closed")));
+                  }
+                  else{
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Failed to close the registration")));
+                  }
+                 }
+                }),
+
+                OutlinedButton( onPressed: () async{
+                   bool res = await AdminDb.deleteEvent(data.uid!);
+            if(res){
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Event Deleted")));
+               
+               Get.offAndToNamed(RoutesNames.adminLanding);
+                  }
+                  else{
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Failed to delete")));
+                  }
+
+                  }, child: Text("Delete Event"),)
+              ],
             ),
           ],
         ),

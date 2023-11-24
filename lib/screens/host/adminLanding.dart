@@ -93,7 +93,7 @@ class AdminLanding extends StatelessWidget {
             children: [
               const AdminHome(),
               EventForm(),
-              const Analytics(),
+               EventAnalytics(),
               const HostProfile(),
             ],
           )),

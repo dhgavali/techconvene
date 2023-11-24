@@ -28,7 +28,7 @@ class EventService {
   static Future<List<EventModel>> getHostEvents(
       {required String hostid}) async {
     QuerySnapshot<Object?> snapshot =
-        await _ref.where('uid', isEqualTo: hostid).get();
+        await _ref.where('hostId', isEqualTo: hostid).get();
     List<EventModel> events = [];
 
     if (snapshot.docs.isNotEmpty) {

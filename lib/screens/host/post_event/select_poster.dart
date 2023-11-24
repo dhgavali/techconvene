@@ -32,7 +32,6 @@ final loadingController =Get.put(LoadingController());
   bool isLoading =false;
   @override
   void dispose() {
-    // TODO: implement dispose
     fileController.dispose();
     uploadController.dispose();
     super.dispose();
@@ -40,7 +39,6 @@ final loadingController =Get.put(LoadingController());
 
 @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     
   }
@@ -104,7 +102,7 @@ final loadingController =Get.put(LoadingController());
                         onpress: img == null
                             ? () {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                   const SnackBar(
                                         content: Text("Please choose image")));
                               }
                             : () async {
@@ -114,7 +112,8 @@ final loadingController =Get.put(LoadingController());
                                 final String path =
                                     await uploadController.uploadImage(img);
                                 EventModel eventModel = Get.arguments;
-                                eventModel.uid = FirebaseAuth.instance.currentUser!.uid;
+                                eventModel.uid = eventId;
+                                eventModel.hostid = FirebaseAuth.instance.currentUser!.uid;
                                 eventModel.posterUrl = path;
                                 print(eventModel);
                                 // eventdata['posterUrl'] = path;
@@ -122,30 +121,28 @@ final loadingController =Get.put(LoadingController());
                                 // eventdata['uid'] =
                                     // FirebaseAuth.instance.currentUser!.uid;
                                
-//                                 bool res = await AdminDb.postEvent(eventModel.toJson());
-//                                 bool res2 = await AdminDb.storeEventIdInUserCollection(eventModel.uid, eventId);
-//                                 if (res && res2) {
-//                                   print("successfully uploaded event");
-//  await Future.delayed(Duration(seconds: 2));
+                                bool res = await AdminDb.postEvent(eventModel.toJson());
+                                bool res2 = await AdminDb.storeEventIdInUserCollection(FirebaseAuth.instance.currentUser!.uid, eventId);
+                                if (res && res2) {
+                                  print("successfully uploaded event");
+ await Future.delayed(Duration(seconds: 2));
+
+    
+      loadingController.hideLoading();
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Successfully Uploaded Event!")));
+                                  // Get.toNamed(RoutesNames.adminHome);
+                                   Get.offAllNamed(RoutesNames.adminLanding);
+
+                                } else {
+                                  print("failed to uplaod event");
+                                  await Future.delayed(Duration(seconds: 2));
 
       // Hide loading
-      // loadingController.hideLoading();
-      //                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Successfully Uploaded Event!")));
-      //                             // Get.toNamed(RoutesNames.adminHome);
-      //                              Get.offAllNamed(RoutesNames.adminLanding);
+      loadingController.hideLoading();
+                                  // Get.toNamed(RoutesNames.adminHome);
+                                   Get.offAllNamed(RoutesNames.adminLanding);
+                                }
 
-      //                           } else {
-      //                             print("failed to uplaod event");
-      //                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to  Uploaded Event!")));
-      //                             await Future.delayed(Duration(seconds: 2));
-
-      // // Hide loading
-      // loadingController.hideLoading();
-      //                             // Get.toNamed(RoutesNames.adminHome);
-      //                              Get.offAllNamed(RoutesNames.adminLanding);
-      //                           }
-
-                                // image uplaoding to firebase
                               }),
                   ],
                 ),

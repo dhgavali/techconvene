@@ -4,6 +4,7 @@ import 'package:techconvene/constants/buttons.dart';
 import 'package:techconvene/constants/loading.dart';
 import 'package:techconvene/constants/text_field.dart';
 import 'package:techconvene/constants/text_styles.dart';
+import 'package:techconvene/models/hostprofile_model.dart';
 import 'package:techconvene/screens/host/widgets/host_profile_header.dart';
 import 'package:techconvene/services/admin/admin_db.dart';
 import 'package:techconvene/services/auth.dart';
@@ -19,18 +20,18 @@ class HostProfile extends StatelessWidget {
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-            child: FutureBuilder(
+            child: FutureBuilder<HostProfileModel>(
               future: AdminDb.getHostProfile(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
-                  Map<String, dynamic> data = snapshot.data!;
+                  HostProfileModel data = snapshot.data!;
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          MyTexts.h2("Welcome, ${data['fullname']} !"),
+                          MyTexts.h2("Welcome, ${data.name} !"),
                           IconButton(
                             onPressed: () async {
                               showDialog(
@@ -63,7 +64,7 @@ class HostProfile extends StatelessWidget {
                         ],
                       ),
 
-                      const HostProfileHeader(),
+                       HostProfileHeader(totalEvents: data.eventLists!.length.toString() ?? "0", totalParticipants: "-",),
                       const Divider(
                         height: 2,
                       ),
@@ -75,12 +76,12 @@ class HostProfile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           DataRow(
-                              data: data['club'], label: "Club / Organization"),
+                              data: data.club ?? "-", label: "Club / Organization"),
                           DataRow(
-                              data: data['position'], label: "Position / Role"),
-                          DataRow(data: data['email'], label: "Email Id"),
-                          DataRow(data: data['mobile'], label: "Mobile No."),
-                          DataRow(data: data['city'], label: "City"),
+                              data: data.position, label: "Position / Role"),
+                          DataRow(data: data.email, label: "Email Id"),
+                          DataRow(data: data.mobile, label: "Mobile No."),
+                          DataRow(data: data.city, label: "City"),
                         ],
                       ),
                       Padding(

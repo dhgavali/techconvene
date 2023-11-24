@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:techconvene/router/route_names.dart';
-import 'package:techconvene/services/users/users_db.dart';
 import 'package:techconvene/shared/SharedData.dart';
 import 'package:techconvene/shared/mysnackbar.dart';
 

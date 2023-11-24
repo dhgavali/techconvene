@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:techconvene/models/event_model.dart';
+import 'package:techconvene/models/hostprofile_model.dart';
+import 'package:techconvene/screens/host/hostProfile.dart';
 
 class AdminDb {
   static final CollectionReference _ref =
@@ -38,17 +40,16 @@ class AdminDb {
     }
   }
 
-  static Future<Map<String, dynamic>> getHostProfile() async {
+  static Future<HostProfileModel> getHostProfile() async {
     print("get host profile");
     print(FirebaseAuth.instance.currentUser!.uid);
     QuerySnapshot data = await _ref
         .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
-    var obj = data.docs[0].data();
-    // print(obj)
     Map<String, dynamic> map = data.docs[0].data() as Map<String, dynamic>;
-    // Map<String, dynamic> da = obj;
-    return map;
+  
+
+    return HostProfileModel.fromJson(map);
   }
 
 
@@ -66,7 +67,9 @@ static Future<String> getAdminId() async{
     try {
       print("event data is $eventdata");
       // await _eventref.add(eventdata);
-      await _eventref.doc(eventdata['eventId']).set(eventdata);
+      await _eventref.doc(eventdata['uid']).set(eventdata);
+
+      await storeEventIdInUserCollection(FirebaseAuth.instance.currentUser!.uid, eventdata['eventId']);
       return true;
     } catch (e) {
       print(e.toString());
@@ -79,6 +82,92 @@ static Future<String> getAdminId() async{
     await _ref.doc(userId).update({
       'eventLists': FieldValue.arrayUnion([eventId]),
     });
+    return true;
+  } catch (e) {
+    print('Error storing eventId in user collection: $e');
+    return false;
+  }
+}
+
+
+
+ static Future<bool> addHostEvent(String eventId, String userId) async {
+    try {
+      // Reference to the specific event document
+      DocumentReference eventRef = _ref.doc(userId.trim());
+
+      // Update the participants field by adding the user ID to the array
+      await eventRef.update({
+        'eventParticipated': FieldValue.arrayUnion([eventId]),
+      });
+
+
+
+      print('User $userId registered for event $eventId successfully.');
+      return true;
+    } catch (e) {
+      print('Error registering user for event: $e');
+      return false;
+      // Handle error as needed
+    }
+  }
+
+
+//register user for an event
+  static Future<bool> addEventInAdminDb(String eventId, String userId) async {
+    try {
+      // Reference to the specific event document
+      DocumentReference userRef = _ref.doc(userId.trim());
+print(userRef.id.trim());
+      // Update the participants field by adding the user ID to the array
+      await userRef.update({
+        'eventList': FieldValue.arrayUnion([eventId]),
+      });
+      print('User $userId registered for event $eventId successfully.');
+      return true;
+    } catch (e) {
+      print('Error registering user for event: $e');
+      return false;
+      // Handle error as needed
+    }
+  }
+   static Future<bool> removeEventfromAdmin(String eventId, String userId) async {
+    try {
+      // Reference to the specific event document
+      DocumentReference userRef = _ref.doc(userId.trim());
+
+      // Update the participants field by adding the user ID to the array
+      await userRef.update({
+        'eventLists': FieldValue.arrayRemove([eventId]),
+      });
+
+      print('User $userId registered for event $eventId successfully.');
+      return true;
+    } catch (e) {
+      print('Error registering user for event: $e');
+      return false;
+      // Handle error as needed
+    }
+  }
+
+  // close registrations
+  static Future<bool> closeRegistrations(String eventId) async {
+  try {
+    await _eventref.doc(eventId).update({
+      'isClosed': true,
+    });
+    return true;
+  } catch (e) {
+    print('Error storing eventId in user collection: $e');
+    return false;
+  }
+}
+
+
+  static Future<bool> deleteEvent(String eventId) async {
+  try {
+    await _eventref.doc(eventId).delete();
+    await removeEventfromAdmin(eventId, FirebaseAuth.instance.currentUser!.uid);
     return true;
   } catch (e) {
     print('Error storing eventId in user collection: $e');

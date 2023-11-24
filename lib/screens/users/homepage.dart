@@ -63,6 +63,7 @@ class _HomePageState extends State<HomePage> {
                           itemCount: events!.length,
                           itemBuilder: (BuildContext context, int index) {
                             EventModel data = events[index];
+                            print("printing ${data.isClosed}");
                             return GestureDetector(
                               onTap: () {
                                 Get.toNamed(RoutesNames.eventScreen,
@@ -126,6 +127,10 @@ class _HomePageState extends State<HomePage> {
                                             MyTexts.h4(data.prizes ?? "-"),
                                           ],
                                         ),
+                                      data.isClosed ?
+                                        Row(children: [
+                                          Text("Registrations are closed", style: TextStyle(color: Colors.red),)
+                                        ],) : Container()
                                       ],
                                     )
                                   ],

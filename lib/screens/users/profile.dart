@@ -108,9 +108,8 @@ class ProfilePage extends StatelessWidget {
            const SizedBox(height: 20),
            const CircleAvatar(
               radius: 60,
-              backgroundImage: NetworkImage(
-                'https://i.pravatar.cc/300',
-              )
+              backgroundColor: Colors.grey,
+              
             ),
             SizedBox(height: 20),
             Text(

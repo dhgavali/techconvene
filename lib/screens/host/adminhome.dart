@@ -40,6 +40,7 @@ class AdminHome extends StatelessWidget {
                             itemCount: events!.length,
                             itemBuilder: (BuildContext context, int index) {
                               EventModel data = events[index];
+                              print("Event data ${data.uid}" );
                               return GestureDetector(
                                 onTap: () {
                                   Get.toNamed(RoutesNames.eventDetails,
@@ -113,7 +114,7 @@ class AdminHome extends StatelessWidget {
                           );
                         } else {
                           return Center(
-                            child: Loadings.basic(),
+                            child: Text("You don't have any events posted"),
                           );
                         }
                       } else {

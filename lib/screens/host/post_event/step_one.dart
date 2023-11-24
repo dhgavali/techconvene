@@ -134,11 +134,12 @@ class _EventFormState extends State<EventForm> {
                       if (_formkey.currentState!.validate()) {
                         EventModel eventModel = EventModel(
                           eventname: _eventName.text.toString(),
-                          club: "club",
+            
                           prizes: _prizes.text.toString(),
                           description: _description.text.toString(),
                           posterUrl: "",
                           uid: "",
+                          isClosed:  false,
                           location: _pincode.text.toString(),
                           eventMode: "",
                           startDate: selectedDate1,

@@ -2,25 +2,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EventModel {
    String eventname;
-   String? club;
    String? prizes;
    String description;
    String posterUrl;
+   bool isClosed;
    String? uid;
    String location;
    String? eventMode;
    DateTime? startDate;
    DateTime? endDate;
    List<String?>? participants;
+   String? hostid;
+   
 
   EventModel({
     required this.eventname,
     required this.posterUrl,
     required this.description,
     required this.location,
+    required this.isClosed,
      this.uid,
+     this.hostid,
     this.eventMode,
-     this.club,
      this.prizes,
      this.participants,
      this.startDate,
@@ -30,11 +33,12 @@ class EventModel {
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
       eventname: json['eventname'],
-      club: json['club'],
       prizes: json['prizes'],
       description: json['description'],
       posterUrl: json['posterUrl'],
-      uid: json['eventId'],
+      uid: json['uid'],
+      hostid: json['hostId'],
+      isClosed: json['isClosed'] ?? false,
       location: json['location'],
       eventMode: json['eventMode'] ?? "null",
      startDate: (json['startDate'] as Timestamp).toDate(),
@@ -45,14 +49,15 @@ class EventModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'eventname': eventname, 
-      'club': club,
+      'eventname': eventname,
       'prizes': prizes,
       'description': description,
       'posterUrl': posterUrl,
       'uid': uid,
-      'location': location,
-      'participants' : participants,
+      'hostId' : hostid,
+      'isClosed' : isClosed,
+      'location': location ?? "Online",
+      'participants' : participants ?? [],
       'startDate': startDate,
       'endDate': endDate,
     };
